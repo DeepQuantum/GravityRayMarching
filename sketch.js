@@ -6,6 +6,7 @@ var dir;
 var max_iterations = 50;
 var Gravity = 0.001;
 var bend = true;
+var show_circles = false;
 
 function setup() {
   createCanvas(1000, 1000);
@@ -40,7 +41,8 @@ function draw() {
   }
   for (var j = 0; j < circles_to_draw.length; j++) {
     fill(0); 
-    circle(circles_to_draw[j].currentPoint.x, circles_to_draw[j].currentPoint.y, circles_to_draw[j].t * 2);
+    if (show_circles)
+      circle(circles_to_draw[j].currentPoint.x, circles_to_draw[j].currentPoint.y, circles_to_draw[j].t * 2);
     if (j < circles_to_draw.length - 1)
     line(circles_to_draw[j].currentPoint.x, circles_to_draw[j].currentPoint.y, circles_to_draw[j + 1].currentPoint.x, circles_to_draw[j + 1].currentPoint.y);
   }
@@ -67,11 +69,14 @@ function keyPressed(){
   if (key == ' '){ //this means space bar, since it is a space inside of the single quotes 
     bend = !bend;
   } 
+  if (key == "g") {
+    show_circles = !show_circles;
+  }
   else if (key == "w"){
-    Gravity *= 1.01;
+    Gravity *= 1.001;
   }
   else if (key == "s"){
-    Gravity /= 1.01;
+    Gravity /= 1.001;
   }
   else if (key == "a"){
     max_iterations -= 1;
